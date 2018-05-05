@@ -1,0 +1,18 @@
+{
+  "name": "jyutping-table-parser",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive '{,!(node_modules)/**}/*.test.js' --reporter spec"
+  },
+  "author": "ChakLim Wong <chaklim@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "hkscs_unicode_converter": "^0.1.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.1.1"
+  }
+}
