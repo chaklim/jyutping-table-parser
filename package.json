@@ -1,7 +1,7 @@
 {
   "name": "jyutping-table-parser",
   "version": "0.1.0",
-  "description": "",
+  "description": "just a JPTableFull.pdf parser",
   "main": "index.js",
   "scripts": {
     "test": "mocha --recursive '{,!(node_modules)/**}/*.test.js' --reporter spec"
