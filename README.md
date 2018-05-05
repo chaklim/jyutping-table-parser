@@ -1,4 +1,6 @@
 # Jyutping Table Parser
+[![Build Status](https://travis-ci.org/chaklim/jyutping_table_parser.svg?branch=master)](https://travis-ci.org/chaklim/jyutping_table_parser)
+
 just a JPTableFull.pdf parser
 
 [JPTableFull PDF Download](http://www.iso10646hk.net/download/jp/doc/JPTableFull.pdf)
