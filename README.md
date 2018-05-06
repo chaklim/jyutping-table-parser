@@ -7,11 +7,11 @@ just a JPTableFull.pdf parser
 
 ## Installation
 
-  `npm install jyutping_table_parser`
+  `npm install jyutping-table-parser`
 
 ## Usage
 
-    const jyutpingTableParser = require('jyutping_table_parser');
+    const jyutpingTableParser = require('jyutping-table-parser');
 
     const characters = jyutpingTableParser.parseJyutpingInput();
 
