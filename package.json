@@ -1,6 +1,6 @@
 {
   "name": "jyutping-table-parser",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "just a JPTableFull.pdf parser",
   "main": "index.js",
   "scripts": {
