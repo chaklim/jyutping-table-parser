@@ -15,7 +15,7 @@ just a JPTableFull.pdf parser
 
     const characters = jyutpingTableParser.parseJyutpingInput();
 
-  Output (characters) should be 
+  Output (characters) should be
 
     [
       {
@@ -50,9 +50,9 @@ just a JPTableFull.pdf parser
 
 #### TYPE - Character Type.
 - (Optional) Array of string with possible values
-          
+
       '<', '#', '>', 'S', '$', '*', '**', '***', '****'
-  
+
 #### RG
 - Number with possible values 1, 2 or 3.
 
@@ -64,16 +64,16 @@ just a JPTableFull.pdf parser
 
 #### CH - The character.
 - String. Unicode re-mapped to HKSCS_2016 one.
-  
+
 #### JYUTPING - Jyutping values
-- (Optional) Array of String each contains a jyutping value. 
- 
+- (Optional) Array of String each contains a jyutping value.
+
 #### EN
   - (Optional) String with possible values 's', 't'
 
 #### PN - Phonetic.
   - Number starts with 1.
-  
+
 #### CL
   - (Optional) Boolean.
 
@@ -85,7 +85,7 @@ For more detailed value description, please reference the original PDF section 5
 ---
 
 ## Output Example
-    
+
     {
       "type": [
         ">"
@@ -122,7 +122,7 @@ For more detailed value description, please reference the original PDF section 5
 
 ## Tests
 
-  `npm test`
+  `npm test` or `yarn test`
 
 ## Contributing
 
