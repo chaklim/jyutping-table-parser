@@ -42,7 +42,7 @@ const parseCharacter = (str) => {
   const parseChResult = parseCh(parseUcs2Result.str);
 
   const character = {};
-  
+
   !!parseTypeResult.type && (character.type = parseTypeResult.type);
   !!parseRgResult.rg && (character.rg = parseRgResult.rg);
   !!parseRadResult.rad && (character.rad = parseRadResult.rad);
@@ -57,7 +57,7 @@ const parseCharacter = (str) => {
 
     character.infoArray = [characterInfo];
   }
-  
+
   if (Object.keys(character).length <= 0) {
     return {
       character: undefined,
@@ -66,7 +66,12 @@ const parseCharacter = (str) => {
   }
 
   let tempStr = parseChResult.str || '';
-  
+
+  let lastCharacterInfo = undefined;
+  if (Array.isArray(character.infoArray) && character.infoArray.length > 0) {
+    lastCharacterInfo = {...character.infoArray[0]};
+  }
+
   while (true) {
     const strBeforeParse = tempStr;
     const parseJyutpingResult = parseJyutping(tempStr);
@@ -81,7 +86,7 @@ const parseCharacter = (str) => {
       tempStr = strBeforeParse;
       break;
     }
-    
+
     const parseEnResult = parseEn(parseJyutpingResult.str);
     const parsePnResult = parsePn(parseEnResult.str);
     const parseClResult = parseCl(parsePnResult.str);
@@ -101,7 +106,26 @@ const parseCharacter = (str) => {
       character.infoArray = [];
     }
     if (haveCharacterInfo) {
+      const needToBreakForNewCharacter = (
+        !!lastCharacterInfo && (
+          (
+            lastCharacterInfo.en === undefined &&
+            (characterInfo.en === 's' || characterInfo.en === 't')
+          ) ||
+          (
+            lastCharacterInfo.en === characterInfo.en &&
+            parseInt(lastCharacterInfo.pn, 10) + 1 !== parseInt(characterInfo.pn, 10)
+          )
+        )
+      )
+
+      if (needToBreakForNewCharacter) {
+        tempStr = strBeforeParse;
+        break;
+      }
+
       character.infoArray.push(characterInfo);
+      lastCharacterInfo = {...characterInfo};
     }
 
     tempStr = parseRefResult.str;
