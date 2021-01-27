@@ -13,6 +13,105 @@ describe('parseCharacter', function () {
     });
   });
 
+  // new character breaking case
+  it(`should parse 'zi12\\n15001倁\\nbing3\\nt\\n1\\n1\\n5E76\\n并5002倂\\nping3\\nt 2 又\\n5E76\\n并\\nbing6\\nt 3 又\\n5E76\\n并'`, function() {
+    const result = parseCharacter('zi12\n15001倁\nbing3\nt\n1\n1\n5E76\n并5002倂\nping3\nt 2 又\n5E76\n并\nbing6\nt 3 又\n5E76\n并');
+
+    expect(result).to.deep.equal({
+      character: {
+        ch: '倁',
+        ucs2: "5001",
+        rg: 2,
+        infoArray: [
+          {
+            jyutping: ["zi1"],
+            pn: 1,
+          },
+        ],
+      },
+      str: '\nbing3\nt\n1\n1\n5E76\n并5002倂\nping3\nt 2 又\n5E76\n并\nbing6\nt 3 又\n5E76\n并',
+    })
+  });
+
+  // new character breaking case
+  it(`should parse character two times 'zaat31\\n1672D札\\nzaat2\\n2 又 2\\nzaap3\\n3 又\\naat3\\n4\\nngaat3\\n5 又 1.3\\nseot6\\ns\\n1\\n1\\n8853 672F\\n术術672E朮\\nseot6\\nt 1\\n672F\\n术'`, function() {
+    const result = parseCharacter('zaat31\n1672D札\nzaat2\n2 又 2\nzaap3\n3 又\naat3\n4\nngaat3\n5 又 1.3\nseot6\ns\n1\n1\n8853 672F\n术術672E朮\nseot6\nt 1\n672F\n术');
+    const result2 = parseCharacter(result.str);
+
+    expect(result).to.deep.equal({
+      character: {
+        ch: '札',
+        ucs2: "672D",
+        rg: 1,
+        infoArray: [
+          {
+            jyutping: ["zaat3"],
+            pn: 1,
+          },
+          {
+            jyutping: ["zaat2"],
+            pn: 2,
+            cl: true,
+            sc: '2',
+          },
+          {
+            jyutping: ["zaap3"],
+            pn: 3,
+            cl: true,
+          },
+          {
+            jyutping: ["aat3"],
+            pn: 4,
+          },
+          {
+            jyutping: ["ngaat3"],
+            pn: 5,
+            cl: true,
+            sc: '1.3',
+          },
+        ],
+      },
+      str: '\nseot6\ns\n1\n1\n8853 672F\n术術672E朮\nseot6\nt 1\n672F\n术',
+    });
+
+    expect(result2).to.deep.equal({
+      character: {
+        ch: '朮',
+        ucs2: "672E",
+        rg: 1,
+        infoArray: [
+          {
+            jyutping: ['seot6'],
+            en: 's',
+            pn: 1,
+            ref: [
+              {
+                ucs2: '8853',
+                ch: '術'
+              },
+              {
+                ucs2: '672F',
+                ch: '术'
+              },
+            ],
+          },
+          {
+            jyutping: ['seot6'],
+            en: 't',
+            pn: 1,
+            ref: [
+              {
+                ucs2: '672F',
+                ch: '术'
+              },
+            ],
+          },
+        ],
+      },
+      str: '',
+    });
+  });
+
   it(`should parse 'jau12\\n13400㐀'`, function () {
     const result = parseCharacter('jau12\n13400㐀');
 
